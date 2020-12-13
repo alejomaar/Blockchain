@@ -1,6 +1,6 @@
 import hashlib 
-import json
-import time
+#import json
+#import time
 
 class Data:
     def __init__(self,name,cash):
@@ -17,6 +17,11 @@ class Blockchain:
     def create(self,data):
         block = Blockchain.Block(str(len(self.blockchain)),self.blockchain[-1].Block['hash'],data)
         self.blockchain.append(block)
+    def JSON(self):
+        json = [];
+        for block in self.blockchain:
+            json.append(block.JSON())
+        return json
     def show(self):
         print("\n\n")
         for block in self.blockchain:      
@@ -49,7 +54,9 @@ class Blockchain:
             #return 
         
         def JSON(self):
-            return json.dumps(self.Block)
+            return self.Block
+            #return {'index':self.Block['index'],'data':self.Block['data']}
+            #return json.dumps(self.Block)
         def show(self):
             Block = self.Block
             print(Block['index'],Block['data'])
@@ -58,12 +65,12 @@ class Blockchain:
             print(Block['index'],Block['hash'],'-',Block['prev_hash'])
              
     
-start_time = time.time()
+'''start_time = time.time()
 blockchain = Blockchain();
 blockchain.create(Data("alejandro","20"))
 blockchain.create(Data("Fernando","51"))
 blockchain.create(Data("Sofia","21"))
 blockchain.show()
 blockchain.showhash()
-print("--- %s seconds ---" % (time.time() - start_time))
+print("--- %s seconds ---" % (time.time() - start_time))'''
 
