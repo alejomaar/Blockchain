@@ -1,6 +1,6 @@
-from random import *
 import hashlib 
 import json
+import time
 
 class Data:
     def __init__(self,name,cash):
@@ -11,29 +11,42 @@ class Blockchain:
         self.blockchain = []#Block Origin
         self.genesis()
     def genesis(self):
-        genesis_data = Data("camila","30")
+        genesis_data = Data("","0")
         genesis_block = Blockchain.Block(str(len(self.blockchain)),'0'*64,genesis_data)
         self.blockchain.append(genesis_block)
     def create(self,data):
         block = Blockchain.Block(str(len(self.blockchain)),self.blockchain[-1].Block['hash'],data)
         self.blockchain.append(block)
     def show(self):
-        for block in self.blockchain:
+        print("\n\n")
+        for block in self.blockchain:      
             block.show()
     def showhash(self):
+        print("\n\n")
         for block in self.blockchain:
             block.showhash()
+
+
     class Block:
         def __init__(self,index,prev_hash,Data):
-            Hash = self.gethash(index,prev_hash,Data)
-            self.Block = {'index':index,'hash':Hash,'prev_hash':prev_hash,'data':Data.Data}
+            Hash,nonce = self.proof_of_work(index,prev_hash,Data)
+            self.Block = {'index':index,'nonce':nonce,'hash':Hash,'prev_hash':prev_hash,'data':Data.Data}
 
-        def gethash(self,index,prev_hash,Data):
-            Format= index+'/'+prev_hash+'/'+Data.Data['Name']+'/'+Data.Data['Cash']
-            Hash = self.encrypt(Format)
-            return Hash
-        def encrypt(self,Format):
-            return hashlib.sha256(Format.encode()).hexdigest()
+        def proof_of_work(self,index,prev_hash,Data):
+            Info= index+'/'+prev_hash+'/'+Data.Data['Name']+'/'+Data.Data['Cash']
+            hash=''
+            nonce=0
+            
+            while(not self.is_hash_valid(hash)):
+                temp = Info+str(nonce)
+                hash = hashlib.sha256(temp.encode()).hexdigest()
+                nonce+=1
+
+            return hash,nonce
+        def is_hash_valid(self,hash):
+            return (hash.startswith('0'*2))
+        #def encrypt(self,Format):
+            #return 
         
         def JSON(self):
             return json.dumps(self.Block)
@@ -43,15 +56,14 @@ class Blockchain:
         def showhash(self):
             Block = self.Block
             print(Block['index'],Block['hash'],'-',Block['prev_hash'])
-        def showall(self):
-            print(self.JSON())        
+             
     
-
-
-
+start_time = time.time()
 blockchain = Blockchain();
-blockchain.create(Data("Alejandro","21"))
+blockchain.create(Data("alejandro","20"))
 blockchain.create(Data("Fernando","51"))
 blockchain.create(Data("Sofia","21"))
+blockchain.show()
 blockchain.showhash()
+print("--- %s seconds ---" % (time.time() - start_time))
 
