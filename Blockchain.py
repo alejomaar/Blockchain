@@ -49,7 +49,7 @@ class Blockchain:
 
             return hash,nonce
         def is_hash_valid(self,hash):
-            return (hash.startswith('0'*2))
+            return (hash.startswith('0'*3))
         #def encrypt(self,Format):
             #return 
         
