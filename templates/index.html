@@ -3,9 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
     <title>Document</title>
 </head>
 <body>
     <h1>Blockchain</h1>
+    <form method="POST">
+        <label for="name">Name</label>
+        <input type="text" id="Name" name="Name">
+        <label for="cash">Cash</label>
+        <input type="number" id="Cash" name="Cash">
+        <input type="submit" value="Submit">
+    </form>
+
+    <div class="block" >
+        <div class="index" >
+
+        </div>
+        <div class="hashes">
+            <div class="hash" >
+                <div class="hashicon">#</div>
+            </div>
+            <div class="hash" >
+                <div class="hashicon">#</div>
+            </div>
+        </div>
+        <div class="feature">
+            <div class="title">
+
+            </div>
+            <div class="value">
+
+            </div>
+        </div>
+        <div class="feature">
+            <div class="title">
+
+            </div>
+            <div class="value">
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function $(id)
+        {
+            return document.getElementById(id);
+        }
+
+        var Blockchain;
+        var form = document.querySelector("form")
+        form.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            var data = new FormData(form);
+
+            fetch('/add',{
+                method:'POST',
+                body: data
+            }).then(res => 
+            { 
+                console.log(res.json);
+                return res.json();
+            }).then(data=>{
+                Blockchain= data;
+                showblockchain();
+                //console.log(data);
+            });
+
+        })
+
+        function showblockchain(){
+            var nodeblock = document.querySelector(".block");
+            
+            Blockchain.forEach(Block => {
+                var cln = nodeblock.cloneNode(true);
+                cln.querySelector(".index").innerText=Block.index;
+                document.querySelector("body").appendChild(cln)
+                console.log(Block)
+            });
+        }
+
+
+    </script>
+    
 </body>
 </html>

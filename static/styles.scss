@@ -1,0 +1,58 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body,html{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+h1,span,a{
+    text-align: center;
+}
+
+h1{
+    margin: 0 auto;
+}
+form{
+
+    display: flex;
+    width: 80%;
+    margin: 1rem auto;
+    justify-content: center;
+}
+
+.block{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    background-color: darkgrey;
+    >*{
+        margin-left: 0.3rem;
+        //border: 5px solid red;
+    }
+    .index{
+        background-color: red;
+        flex: 1 0 0;
+    }
+    .hashes{
+        background-color: green;
+        flex: 2 0 0;
+    }.feature{
+        background-color: blue;
+        flex: 1 0 0;
+        display: flex;
+        flex-direction: column;
+        .title,.value{
+            height: 50%;
+            width: 100%;
+        }
+    }
+    .hash:first-child,.title{
+        background-color: darkgoldenrod
+    }
+    
+}
