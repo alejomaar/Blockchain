@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Petrona:wght@100;200;300;400;500;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>Blockchain</h1>
@@ -16,7 +18,10 @@
         <input type="submit" value="Submit">
     </form>
 
-    <div class="block" >
+    <div class="registers">
+
+    </div>
+    <div class="block" style="display:none" >
         <div class="index" >
 
         </div>
@@ -30,7 +35,7 @@
         </div>
         <div class="feature">
             <div class="title">
-
+                Cash
             </div>
             <div class="value">
 
@@ -38,7 +43,7 @@
         </div>
         <div class="feature">
             <div class="title">
-
+                Name
             </div>
             <div class="value">
                 
@@ -75,13 +80,19 @@
 
         function showblockchain(){
             var nodeblock = document.querySelector(".block");
-            
-            Blockchain.forEach(Block => {
+            nodeblock.style.display="flex";
+            document.querySelector(".registers").innerHTML='';
+            Blockchain.forEach(Block => {          
                 var cln = nodeblock.cloneNode(true);
                 cln.querySelector(".index").innerText=Block.index;
-                document.querySelector("body").appendChild(cln)
+                cln.querySelectorAll(".hash")[0].innerText=Block.prev_hash;
+                cln.querySelectorAll(".hash")[1].innerText=Block.hash;
+                cln.querySelectorAll(".value")[0].innerText=Block.data.Cash;
+                cln.querySelectorAll(".value")[1].innerText=Block.data.Name;
+                document.querySelector(".registers").appendChild(cln)
                 console.log(Block)
             });
+            nodeblock.style.display="none";
         }
 
 

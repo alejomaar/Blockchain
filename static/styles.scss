@@ -3,6 +3,10 @@
     margin: 0;
     padding: 0;
 }
+$oddscolor: #23162d;
+$evencolor: #3c2b75;
+$font :'Petrona';
+
 body,html{
     height: 100%;
     width: 100%;
@@ -10,8 +14,9 @@ body,html{
     flex-direction: column;
 }
 
-h1,span,a{
+h1,span,a,div,label{
     text-align: center;
+    font-family: $font;
 }
 
 h1{
@@ -24,26 +29,47 @@ form{
     margin: 1rem auto;
     justify-content: center;
 }
+.registers{
+    
+    .block:nth-child(odd){
+        background-color:$oddscolor;
+    }
+    .block:nth-child(even) {
+        background: $evencolor;
+      }
+}
+
 
 .block{
     width: 80%;
-    margin: 0 auto;
+    margin: 0rem auto;
     display: flex;
-    background-color: darkgrey;
     >*{
-        margin-left: 0.3rem;
+        //margin-left: 0.3rem;
+        border-left: 3px solid black;
+        border-bottom:  3px solid black;
+        color: white;
+        font-weight: lighter;
         //border: 5px solid red;
     }
     .index{
-        background-color: red;
         flex: 1 0 0;
+        margin: 0 auto;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        
     }
     .hashes{
-        background-color: green;
-        flex: 2 0 0;
+        flex: 8 0 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }.feature{
-        background-color: blue;
-        flex: 1 0 0;
+        padding: 0.2rem;
+        flex: 3 0 0;
         display: flex;
         flex-direction: column;
         .title,.value{
@@ -51,8 +77,16 @@ form{
             width: 100%;
         }
     }
+    .title{
+        text-align: center;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+    .hash{
+        font-size: 0.8rem;
+    }
     .hash:first-child,.title{
-        background-color: darkgoldenrod
+       // background-color: #7bfafc;
     }
     
 }

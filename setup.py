@@ -40,7 +40,7 @@ def show():
 
 def BC():
     blockchain.create(Data("Fernando","51"))
-    blockchain.create(Data("Sofia","21"))
+    blockchain.create(Data("rewr","21"))
     blockchain.create(Data("Cris","1000000"))
     '''
 

@@ -69,7 +69,7 @@ class Blockchain:
 blockchain = Blockchain();
 blockchain.create(Data("alejandro","20"))
 blockchain.create(Data("Fernando","51"))
-blockchain.create(Data("Sofia","21"))
+blockchain.create(Data("WSSS","21"))
 blockchain.show()
 blockchain.showhash()
 print("--- %s seconds ---" % (time.time() - start_time))'''
