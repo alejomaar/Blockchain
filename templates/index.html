@@ -7,6 +7,8 @@
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Petrona:wght@100;200;300;400;500;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
+
 </head>
 <body>
     <h1>Blockchain</h1>
@@ -52,31 +54,32 @@
     </div>
 
     <script>
+        //public variables
+        const socket =io();
+        var Blockchain;
+        var form = document.querySelector("form")
         function $(id)
         {
             return document.getElementById(id);
         }
 
-        var Blockchain;
-        var form = document.querySelector("form")
+        
         form.addEventListener('submit',(e)=>{
             e.preventDefault();
-            var data = new FormData(form);
-
-            fetch('/add',{
-                method:'POST',
-                body: data
-            }).then(res => 
-            { 
-                console.log(res.json);
-                return res.json();
-            }).then(data=>{
-                Blockchain= data;
-                showblockchain();
-                //console.log(data);
-            });
-
+            sendSocket();
         })
+
+        socket.on('message',function(msg){
+            console.log(msg);
+        });
+
+        function sendSocket(){
+            const name = $("Name").value;
+            const cash = $("Cash").value;   
+            const json = JSON.stringify({Name:name,Cash:cash});
+            socket.send(json);
+            //console.log(json);
+        }
 
         function showblockchain(){
             var nodeblock = document.querySelector(".block");
@@ -95,8 +98,8 @@
             nodeblock.style.display="none";
         }
 
-
     </script>
-    
+
+
 </body>
 </html>

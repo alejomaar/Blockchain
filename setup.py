@@ -1,9 +1,17 @@
-from flask.json import jsonify, request
 from Blockchain import *
-from flask import Flask,render_template,jsonify
+from flask import Flask,render_template,jsonify,request
+from flask_socketio import SocketIO,send
 
 app =Flask(__name__)
+app.config['SECRET_KEY']='secret'
+socketio = SocketIO(app)
+
 blockchain = Blockchain()
+
+@socketio.on('message')
+def handleMessage(msg):
+    print("mesage",msg)
+    send(msg, broadcast=True)
 
 @app.route('/')
 def home():
@@ -27,22 +35,16 @@ def add():
     else:
         return "Invalid",404
 
-@app.route('/show')
-def show():
-    json = blockchain.JSON()
-    return jsonify(json)
+#@app.route('/show')
+#def show():
+    #json = blockchain.JSON()
+    
+    #return jsonify(json)
 
     #return render_template('index.html',json)
 
-'''def getchain():
-    json = blockchain.JSON()
-    return jsonify(json)
 
-def BC():
-    blockchain.create(Data("Fernando","51"))
-    blockchain.create(Data("rewr","21"))
-    blockchain.create(Data("Cris","1000000"))
-    '''
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app)
+    #app.run(debug=True)
