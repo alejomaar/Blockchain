@@ -17,6 +17,7 @@ class Blockchain:
     def create(self,data):
         block = Blockchain.Block(str(len(self.blockchain)),self.blockchain[-1].Block['hash'],data)
         self.blockchain.append(block)
+        return block.JSON()
     def JSON(self):
         json = [];
         for block in self.blockchain:
@@ -50,8 +51,7 @@ class Blockchain:
             return hash,nonce
         def is_hash_valid(self,hash):
             return (hash.startswith('0'*3))
-        #def encrypt(self,Format):
-            #return 
+        
         
         def JSON(self):
             return self.Block

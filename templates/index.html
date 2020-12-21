@@ -16,7 +16,7 @@
         <label for="name">Name</label>
         <input type="text" id="Name" name="Name">
         <label for="cash">Cash</label>
-        <input type="number" id="Cash" name="Cash">
+        <input type="text" id="Cash" name="Cash">
         <input type="submit" value="Submit">
     </form>
 
@@ -56,46 +56,41 @@
     <script>
         //public variables
         const socket =io();
-        var Blockchain;
         var form = document.querySelector("form")
+        var block;
         function $(id)
         {
             return document.getElementById(id);
         }
-
-        
         form.addEventListener('submit',(e)=>{
             e.preventDefault();
             sendSocket();
         })
 
-        socket.on('message',function(msg){
-            console.log(msg);
+        socket.on('message',function(strNewBlock){
+            //console.log(newBlock);
+            renderBlock(JSON.parse(strNewBlock));
         });
 
         function sendSocket(){
             const name = $("Name").value;
             const cash = $("Cash").value;   
-            const json = JSON.stringify({Name:name,Cash:cash});
-            socket.send(json);
-            //console.log(json);
+            socket.emit('message', {Name:name,Cash:cash});
+           // socket.send(json);
         }
 
-        function showblockchain(){
+        function renderBlock(Block){
             var nodeblock = document.querySelector(".block");
-            nodeblock.style.display="flex";
-            document.querySelector(".registers").innerHTML='';
-            Blockchain.forEach(Block => {          
-                var cln = nodeblock.cloneNode(true);
-                cln.querySelector(".index").innerText=Block.index;
-                cln.querySelectorAll(".hash")[0].innerText=Block.prev_hash;
-                cln.querySelectorAll(".hash")[1].innerText=Block.hash;
-                cln.querySelectorAll(".value")[0].innerText=Block.data.Cash;
-                cln.querySelectorAll(".value")[1].innerText=Block.data.Name;
-                document.querySelector(".registers").appendChild(cln)
-                console.log(Block)
-            });
-            nodeblock.style.display="none";
+            //nodeblock.style.display="flex";
+            var cln = nodeblock.cloneNode(true);
+            cln.style.display="flex";
+            cln.querySelector(".index").innerText=Block.index;
+            cln.querySelectorAll(".hash")[0].innerText=Block.prev_hash;
+            cln.querySelectorAll(".hash")[1].innerText=Block.hash;
+            cln.querySelectorAll(".value")[0].innerText=Block.data.Cash;
+            cln.querySelectorAll(".value")[1].innerText=Block.data.Name;
+            document.querySelector(".registers").appendChild(cln)
+            
         }
 
     </script>

@@ -1,6 +1,7 @@
 from Blockchain import *
 from flask import Flask,render_template,jsonify,request
 from flask_socketio import SocketIO,send
+import json
 
 app =Flask(__name__)
 app.config['SECRET_KEY']='secret'
@@ -10,14 +11,16 @@ blockchain = Blockchain()
 
 @socketio.on('message')
 def handleMessage(msg):
-    print("mesage",msg)
-    send(msg, broadcast=True)
+    global blockchain
+    #Data = json.loads(msg)
+    Block = blockchain.create(Data(msg["Name"],msg["Cash"]))    
+    send(json.dumps(Block), broadcast=True)
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
-@app.route('/add',methods=['POST'])
+'''@app.route('/add',methods=['POST'])
 def add():
     global blockchain
     if request.method == "POST":
@@ -29,20 +32,9 @@ def add():
         blockchain.create(Data(name,cash))
 
         json = blockchain.JSON()
-        #return jsonify({"m1":"data1","m2":"data2"})
         return jsonify(json)
-        #return "success",201
     else:
-        return "Invalid",404
-
-#@app.route('/show')
-#def show():
-    #json = blockchain.JSON()
-    
-    #return jsonify(json)
-
-    #return render_template('index.html',json)
-
+        return "Invalid",404'''
 
 
 if __name__ == '__main__':
