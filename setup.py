@@ -28,23 +28,8 @@ def home():
 def ledger():
     return render_template('ledger.html')
 
-'''@app.route('/add',methods=['POST'])
-def add():
-    global blockchain
-    if request.method == "POST":
-        req = request.form
-
-        name = req["Name"]
-        cash = req["Cash"]
-
-        blockchain.create(Data(name,cash))
-
-        json = blockchain.JSON()
-        return jsonify(json)
-    else:
-        return "Invalid",404'''
-
 
 if __name__ == '__main__':
-    socketio.run(app,debug=True)
+    socketio.run(app)
+    #socketio.run(app,debug=True)
     #app.run(debug=True)
