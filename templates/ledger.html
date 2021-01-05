@@ -10,6 +10,11 @@
 
 </head>
 <body>
+    <div class="register" style="display: none;">
+        <div class="name">Sistema</div>
+        <div class="cash">0 </div>
+    </div>
+
     <div class="transaction">
         <div class="boxInput">
             <label for="emisor">Emisor</label>
@@ -46,30 +51,7 @@
     </div>
 
     <div class="ledger">
-        <div class="register">
-            <div class="name">Sistema</div>
-            <div class="cash">0 </div>
-        </div>
-        <div class="register">
-            <div class="name">Alejandro</div>
-            <div class="cash">0 </div>
-        </div>
-        <div class="register">
-            <div class="name">Cristian</div>
-            <div class="cash">0 </div>
-        </div>
-        <div class="register">
-            <div class="name">Fernanda</div>
-            <div class="cash">0 </div>
-        </div>
-        <div class="register">
-            <div class="name">Lady</div>
-            <div class="cash">0 </div>
-        </div>
-        <div class="register">
-            <div class="name">Tania</div>
-            <div class="cash">0 </div>
-        </div>
+        
     </div>
     
     
@@ -92,7 +74,11 @@
         fetch('/getBlockchain'
         ).then(res =>res.json())
         .then(json=>{
-            console.log(json);
+           // console.log(json);
+            refreshRender(json);
+            //var w1 = new wallet("Alejandro");
+            //console.log(w.getBalance(json));
+            
         });
         
     }
