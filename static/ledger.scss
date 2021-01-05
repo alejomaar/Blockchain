@@ -1,0 +1,66 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+$oddscolor: #23162d;
+$evencolor: #3c2b75;
+$font :'Petrona';
+
+body,html{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+h1,span,a,div,label,button{
+    text-align: center;
+    font-family: $font;
+}
+
+.transaction{
+    margin: 2rem auto;
+    width: 60%;
+    display: flex;
+}
+.boxInput{
+    flex:1 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+}
+.enviar{
+    margin: 0rem auto;
+    width: 60%;
+    button{
+        width: 100%;
+        padding: 1rem;
+        background-color:$oddscolor ;
+        border-radius: 5rem;
+        font-weight: bold;
+        font-size: 2rem;
+        color: white;
+    }
+}
+.ledger{
+    margin: 0rem auto;
+    width: 60%;
+
+}
+.register{
+    //padding: 1rem;
+    width: 100%;
+    display: flex;
+    .name{
+        padding: 0.4rem;
+        background-color: $oddscolor;
+        color: white;
+        flex: 1 0 0;
+    }
+    .cash{
+        flex: 1 0 0;
+        background-color: $evencolor;
+    }
+}

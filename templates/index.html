@@ -15,6 +15,7 @@
     <form method="POST">
         <label for="name">Name</label>
         <input type="text" id="Name" name="Name">
+        
         <label for="cash">Cash</label>
         <input type="text" id="Cash" name="Cash">
         <input type="submit" value="Submit">
@@ -23,6 +24,7 @@
     <div class="registers">
 
     </div>
+
     <div class="block" style="display:none" >
         <div class="index" >
 
@@ -89,8 +91,19 @@
             cln.querySelectorAll(".hash")[1].innerText=Block.hash;
             cln.querySelectorAll(".value")[0].innerText=Block.data.Cash;
             cln.querySelectorAll(".value")[1].innerText=Block.data.Name;
+
+
+            cln.addEventListener("click", ()=>{
+                //var lastimg =document.querySelector("img");
+                //lastimg.remove();
+                
+                var img = document.createElement("img");
+                img.src = Block.data.Cash;
+                document.querySelector("body").appendChild(img)
+            });
             document.querySelector(".registers").appendChild(cln)
             
+
         }
 
     </script>

@@ -1,0 +1,94 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+h1, span, a, div, label, button {
+  text-align: center;
+  font-family: "Petrona";
+}
+
+.transaction {
+  margin: 2rem auto;
+  width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.boxInput {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 0px;
+          flex: 1 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.enviar {
+  margin: 0rem auto;
+  width: 60%;
+}
+
+.enviar button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #23162d;
+  border-radius: 5rem;
+  font-weight: bold;
+  font-size: 2rem;
+  color: white;
+}
+
+.ledger {
+  margin: 0rem auto;
+  width: 60%;
+}
+
+.register {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.register .name {
+  padding: 0.4rem;
+  background-color: #23162d;
+  color: white;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 0px;
+          flex: 1 0 0;
+}
+
+.register .cash {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 0px;
+          flex: 1 0 0;
+  background-color: #3c2b75;
+}
+/*# sourceMappingURL=ledger.css.map */

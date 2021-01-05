@@ -13,12 +13,20 @@ blockchain = Blockchain()
 def handleMessage(msg):
     global blockchain
     #Data = json.loads(msg)
-    Block = blockchain.create(Data(msg["Name"],msg["Cash"]))    
+    Block = blockchain.create(Data(msg["sender"],msg["receiver"],msg["cash"]))    
     send(json.dumps(Block), broadcast=True)
+
+@app.route('/getBlockchain')
+def getBlockchain():
+    return jsonify(blockchain.JSON());
 
 @app.route('/')
 def home():
     return render_template('index.html')
+
+@app.route('/ledger')
+def ledger():
+    return render_template('ledger.html')
 
 '''@app.route('/add',methods=['POST'])
 def add():
@@ -38,5 +46,5 @@ def add():
 
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app,debug=True)
     #app.run(debug=True)

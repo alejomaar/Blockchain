@@ -7,17 +7,7 @@ $oddscolor: #23162d;
 $evencolor: #3c2b75;
 $font :'Petrona';
 
-body,html{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
 
-h1,span,a,div,label{
-    text-align: center;
-    font-family: $font;
-}
 
 h1{
     margin: 0 auto;
@@ -68,6 +58,7 @@ form{
         flex-direction: column;
         justify-content: center;
     }.feature{
+        overflow-x: hidden;
         padding: 0.2rem;
         flex: 3 0 0;
         display: flex;

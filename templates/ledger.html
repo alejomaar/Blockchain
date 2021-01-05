@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Petrona:wght@100;200;300;400;500;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='ledger.css')}}">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
+
+</head>
+<body>
+    <div class="transaction">
+        <div class="boxInput">
+            <label for="emisor">Emisor</label>
+            <select id="emisor">
+                <option value="Sistema">Sistema</option>
+                <option value="Alejandro">Alejandro</option>
+                <option value="Cristian">Cristian</option>
+                <option value="Fernanda">Fernanda</option>
+                <option value="Lady">Lady</option>
+                <option value="Tania">Tania</option>
+            </select>
+        </div>
+        <div class="boxInput">
+            <label for="receptor">Receptor</label>
+            <select id="receptor">
+                <option value="Sistema">Sistema</option>
+                <option value="Alejandro">Alejandro</option>
+                <option value="Cristian">Cristian</option>
+                <option value="Fernanda">Fernanda</option>
+                <option value="Lady">Lady</option>
+                <option value="Tania">Tania</option>
+            </select>
+        </div>
+        <div class="boxInput">
+            <label for="Cantidad">Cantidad</label>
+            <input id="cash" type="number">
+        </div>
+    </div>
+    <div class="enviar">
+        <button onclick="sendSocket()">Enviar</button>
+    </div>
+    <div class="enviar">
+        <button onclick="showBlockchain()">Ver</button>
+    </div>
+
+    <div class="ledger">
+        <div class="register">
+            <div class="name">Sistema</div>
+            <div class="cash">0 </div>
+        </div>
+        <div class="register">
+            <div class="name">Alejandro</div>
+            <div class="cash">0 </div>
+        </div>
+        <div class="register">
+            <div class="name">Cristian</div>
+            <div class="cash">0 </div>
+        </div>
+        <div class="register">
+            <div class="name">Fernanda</div>
+            <div class="cash">0 </div>
+        </div>
+        <div class="register">
+            <div class="name">Lady</div>
+            <div class="cash">0 </div>
+        </div>
+        <div class="register">
+            <div class="name">Tania</div>
+            <div class="cash">0 </div>
+        </div>
+    </div>
+    
+    
+    <script src="{{url_for('static',filename='ledger.js')}}"></script>
+
+    <script>
+    const socket =io();
+    function sendSocket(){
+        var SenderNode =$("emisor").value;
+        var ReceiverNode =$("receptor").value;
+        var cashNode =$("cash").value;   
+        socket.emit('message', {sender:SenderNode,receiver:ReceiverNode,cash:cashNode});
+    }
+
+    socket.on('message',function(strNewBlock){
+        console.log(JSON.parse(strNewBlock));
+    });
+
+    function showBlockchain(){
+        fetch('/getBlockchain'
+        ).then(res =>res.json())
+        .then(json=>{
+            console.log(json);
+        });
+        
+    }
+
+    </script>
+    
+</body>
+</html>
