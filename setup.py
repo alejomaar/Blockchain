@@ -4,7 +4,7 @@ from flask_socketio import SocketIO,send
 import json
 
 app =Flask(__name__)
-app.config['SECRET_KEY']='secret'
+#app.config['SECRET_KEY']='secret'
 socketio = SocketIO(app)
 
 blockchain = Blockchain()
